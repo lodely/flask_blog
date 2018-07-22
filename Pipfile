@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+click = "==6.7"
+flask = "==1.0.2"
+itsdangerous = "==0.24"
+markupsafe = "==1.0"
+werkzeug = "==0.14.1"
+Flask-Script = "==2.0.6"
+Flask-WTF = "==0.14.2"
+"Jinja2" = "==2.10"
+WTForms = "==2.2.1"
+flask-sqlalchemy = "*"
+flask-login = "*"
+cymysql = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"

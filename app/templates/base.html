@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+
+{% block title %}
+    <title>My Blog</title>
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='3rd/ui/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+{% endblock %}
+
+<body>
+{% block navbar %}
+    <div class="container-height flex-vertical-center float-menu">
+        {% if not current_user.is_authenticated %}
+            <div style="float:right">
+                <a href="{{ url_for('web.login') }}">登录</a>
+                <a style="margin-left: 40px;" href="{{ url_for('web.register') }}">注册</a>
+            </div>
+        {% else %}
+            <a style="margin-left: 40px;" href="{{ url_for('web.edit') }}">新建文章</a>
+            <!--<a style="margin-left: 40px;" >个人</a>-->
+            <a style="margin-left: 40px;" href="{{ url_for('web.logout') }}">注销</a>
+        {% endif %}
+    </div>
+{% endblock %}
+<div class='container'>
+    <div class="row">
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                {% if message %}
+                    <div class="alert alert-warning" role="alert">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endwith %}
+        {% if form and form.errors %}
+            {% for key, error in form.errors.items() %}
+                <div class="alert alert-warning" role="alert">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    {% block content %} {% endblock %}
+</div>
+<div id="footer" class="flex-hor-center">
+    <span>© 2018-2020 </span>
+</div>
+</body>
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='3rd/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='3rd/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+    <script>
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+{% endblock %}
+
+</html>

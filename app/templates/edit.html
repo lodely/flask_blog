@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ super() }}
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/gifts.css')}}">
+{% endblock %}
+{% block content %}
+    {{ super() }}
+    {{form.author.label}}: {{ form.author.data }}
+
+    <form method="post">
+    {# 需要添加csrf_token，否则无法提交数据#}
+    {{ form.csrf_token }}
+        标题： {{ form.title }} <br>
+        文本： {{ form.content }} <br>
+        标签： {{ form.tags }} <br>
+    {{ form.submit }}<br>
+
+
+</form>
+{% endblock %}
+{% block scripts %}
+
+{% endblock %}
